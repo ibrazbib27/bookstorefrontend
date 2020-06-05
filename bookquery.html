@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>BookIt!</title>
+
+	 <script src="https://kit.fontawesome.com/a97b8a9b0d.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"/>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+ 
+
+<link rel="stylesheet" th:href="@{/CSS/custom.css}">
+     <link rel="stylesheet"  th:href="@{/CSS/custom.css}" />
+    <script th:src="@{plugins/cardvalidator/jquery.creditCardValidator.js}"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+         <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+         
+    
+		</head>
+    <body>         
+      
+         <div class="modal fade"  id="pwdreset" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+             <h5 id="title" class='col-12 modal-title text-center'>
+              Reset Password  <i class="fas fa-edit"></i>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </h5>
+        </div>
+        <div id="modbody" class="modal-body justify-content-center">
+             <div class="container-fluid">
+                 <form id="reset" onsubmit="document.body.style.cursor='wait'; return true;"   th:action="@{/pwdreset}" method="get" target="frame"  novalidate>
+                <div class="w-100 row"><div class="col-12 text-center"><small class="text-center"><span class="required"></span> Indicates a required field</small></div></div>
+                     <div class="row py-5">
+                         
+                         <div  class='col-1'></div>
+                     <div  class='col-10 text-center'>
+                         <label class="required" for="oldpass">Current Password<i class="far fa-question-circle material-tooltip-smaller ml-1" data-toggle="tooltip" data-placement="right"  title=" Please enter your current password"></i></label>
+                         <input name="oldpass" id="oldpass" class="form-control" type="password" placeholder="Current Password" autofocus>
+                          <span style="float: left;" class="mt-1 text-primary"><input type="checkbox" id="showpwd1" ><small class="ml-2">Show Password</small></span>
+    <div id="first" style="width: 96%;"class="invalid-tooltip  text-center">
+      This must not be blank
+        </div>
+
+                     </div>
+                         <div  class='col-1'></div>
+                 </div>
+                     
+                     <div class="row py-1"></div> 
+                      <div class="row py-1"></div> 
+                     
+                           <div class="row py-5">
+                     <div  class='col-1'></div>
+                     <div  class='col-10 text-center'>
+                     <label for="pass1" class="required">New Password <i class="far fa-question-circle material-tooltip-smaller ml-1" data-toggle="tooltip" data-placement="right"  title="Must not be blank. Please enter a valid password meeting the following criteria: The password must be a minimum of 8 characters long, and it must contain at least one upper-case letter ([A-Z]), one lower-case letter ([a-z]), one number ([0-9]), and one special character ( !&quot;#$%&'()*+,-./:;<=>?@[\]^_`{|}~)."></i></label>
+                         <input name="pass1" id="pass1" class="form-control" type="password" placeholder="New Password" >
+                          <span style="float: left;" class="mt-1 text-primary"><input type="checkbox" id="showpwd2" ><small class="ml-2">Show Password</small></span>
+                     <div id="second" style="width: 96%;"class="invalid-tooltip  text-center">
+      Please enter a valid password
+        </div>
+                     </div>
+                        <div  class='col-1'></div>        
+                 </div>
+                     
+                   <div class="row py-1"></div> 
+                      <div class="row py-1"></div> 
+                     
+                     <div class="row py-5">
+                         <div  class='col-1'></div>
+                       <div  class='col-10 text-center'>
+                     <label for="pass2" class="required">Retype New Password <i class="far fa-question-circle material-tooltip-smaller ml-1" data-toggle="tooltip" data-placement="right"  title="Must not be blank. Please reenter your password. Passwords must be matching."></i></label>
+                      <input name="pass2" id="pass2" class="form-control" type="password" placeholder="Confirm New Password" >
+                     <div id="third" style="width: 96%;"class="invalid-tooltip  text-center">
+Please make sure the passwords are matching
+        </div>
+                     </div>
+                        <div  class='col-1'></div>    
+                 </div>
+                     
+                  
+                     <div class="row my-5"></div> 
+                     
+                 </form>
+                  
+                     </div>
+           
+        </div>
+       
+        <div id="modend" class="modal-footer text-center row justify-content-md-between">
+           
+            <div class="col-12 col-md-4">
+          <button  type="submit" form="reset"  class="btn btn-success w-100" >Reset Password</button>
+            </div>
+       
+           
+            
+            <div class="col-12 col-md-4">
+             <button type="button" class="btn  btn-danger w-100" data-dismiss="modal">Close</button>
+            </div>
+        
+      </div>
+      
+        </div></div>
+
+        </div> 
+       
+   <script>
+   var loaded = false;
+   $(function () {
+   	  $('[data-toggle="tooltip"]').tooltip()
+   	});
+ function resetpass(){
+   	document.getElementById("oldpass").focus();
+ }
+
+
+	 $("#pwdreset").on('click', '#showpwd2', function () {
+ 	     var x = document.getElementById("pass1");
+    	  var y = document.getElementById("pass2");
+    	  if (x.type === "password" && y.type === "password") {
+    	    x.type = "text";
+    	    y.type = "text";
+    	  } else {
+    	    x.type = "password";
+    	    y.type = "password";
+    	  }
+
+}); 
+   $("#pwdreset").on('click', '#showpwd1', function () {
+       
+   	var x = document.getElementById("oldpass");
+
+ 	  if (x.type === "password") {
+ 	    x.type = "text";
+ 	    
+ 	  } else {
+ 	    x.type = "password";
+ 	
+ 	  }
+
+	}); 
+
+$("#pwdreset").on('keyup', '#oldpass', function () {
+  
+  var first = document.getElementById("oldpass").value; 
+  if (first.length == 0 )
+      (document.getElementById("oldpass")).classList.add("is-invalid");
+  else
+      (document.getElementById("oldpass")).classList.remove("is-invalid"); 
+
+}); 
+       $("#pwdreset").on('keyup', '#pass1', function () {
+      
+       	 var first = document.getElementById("pass1").value; 
+            if (first.length == 0 )
+                (document.getElementById("pass1")).classList.add("is-invalid");
+            else if (((new RegExp('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$')).test(first)) == false)
+                (document.getElementById("pass1")).classList.add("is-invalid");
+            else
+                (document.getElementById("pass1")).classList.remove("is-invalid"); 
+            
+            if ((document.getElementById("pass2").value) != first)
+                (document.getElementById("pass2")).classList.add("is-invalid");
+            else
+                (document.getElementById("pass2")).classList.remove("is-invalid");  
+          
+
+   	});
+       $("#pwdreset").on('keyup', '#pass2', function () {
+           
+       	 var first = document.getElementById("pass2").value; 
+            if (first.length == 0 )
+                (document.getElementById("pass2")).classList.add("is-invalid");
+            else
+                (document.getElementById("pass2")).classList.remove("is-invalid"); 
+           
+           
+           
+           if ((document.getElementById("pass1").value) != first)
+                (document.getElementById("pass2")).classList.add("is-invalid");
+            else
+                (document.getElementById("pass2")).classList.remove("is-invalid"); 
+
+         
+
+  	});
+   	
+       $("#pwdreset").on('submit', '#reset', function () {
+           
+       	var required = false;
+  	     $("#pwdreset input").each(function() {
+  	            if((this.value).length == 0) {
+  	              this.classList.add("is-invalid");
+  	              required = true;
+  	            }
+  	         else{
+  	            this.classList.remove("is-invalid"); 
+  	         }
+
+  	        });
+  	     
+  	      if(required == true){
+  	          
+  	      e.preventDefault();
+  	          $('#reset input').each(function(){
+  	               if(this.className.includes('is-invalid')){
+  	            	 this.focus();
+  	                  return false;
+  	              }
+  	             
+  	             
+  	 
+  	});
+
+  	      }
+  	      else
+  	    	  loaded = true;
+
+ 	});
+      
+
+       function frameLoad() {
+       	if(loaded == true){
+ 		 var vals = $('#frm').contents().find('#refresh').text();
+ 		  if (vals.includes('err1')){
+ 			  document.getElementById("first").innerHTML  = "The password you entered is not correct. Please enter your password again";
+ 			  (document.getElementById("oldpass")).classList.add("is-invalid");	
+ 			  document.getElementById("oldpass").focus();
+ 		  }
+ 		  else if (vals.includes('err2')){
+ 			  document.getElementById("second").innerHTML  = "The password you entered is not correct. Please enter your password again";
+ 			  (document.getElementById("pass1")).classList.add("is-invalid");
+ 			  document.getElementById("third").innerHTML  = "The password you entered is not correct. Please enter your password again";
+ 			  (document.getElementById("pass2")).classList.add("is-invalid");	
+ 			  document.getElementById("pass1").focus();
+ 		  }
+ 		  else{
+ 			  document.getElementById("title").innerHTML = '<h5 class="col-12 modal-title text-center" style="color: #4BB543;">Password Reset Complete  <i class="far fa-check-square"></i><button type="button" class="close" data-dismiss="modal">&times;</button></h5>';
+ 			
+ 			  document.getElementById("modbody").innerHTML = "Congratulations on successfully reseting your account password. An email confirming the this change will be sent momentarily. in a moment you will be redirected back to the login page, and you will have login using your new password from here on out.";
+ 			 
+ 			  document.getElementById("modend").innerHTML = "";
+ 			setTimeout(function () {
+ 				 window.location.reload(); //will redirect to your blog page (an ex: blog.html)
+ 			}, 10000);
+ 			  
+ 		  }
+ 		  loaded = false;
+ 		  }
+       
+       }
+   </script>               
+
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" id="bootnavbar">
+  <div class="navbar-toggler-right">
+   <button id="collapsebtn" class="navbar-toggler  py-2" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+
+
+
+
+  <div class="collapse navbar-collapse flex-column" id="navbar">
+<ul class="navbar-nav w-100 justify-content-center text-center px-3">
+     <a class="navbar-brand" href="#">
+    <span class="">BookIt!</span>
+  </a>
+      </ul>
+    <ul class="navbar-nav nav-fill w-100 justify-content-center ">
+      <li class="nav-item dropdown">
+        
+    <form id="searchEngine" class="form-inline w-100 d-flex justify-content-center" th:action="@{/home/customerlogin/findbook}" method="get">
+   <div class="input-group justify-content-center px-md-0 px-5" id="searchbox">
+  <input class="form-control my-0 py-1" type="text" name="query" placeholder="Search" aria-label="Search">
+  <div class="input-group-append">
+    <button type="submit" class="input-group-text" id="searchIcon"><i class="fas fa-search bg-grey"
+        aria-hidden="true"></i></button>
+  </div>
+</div>
+  <div class="w-100"></div>
+          <a class="text-white text-center px-md-2 small py-2" id="advsearch"  onclick="focus()" data-target="#filterSearch" data-toggle="modal" >Advanced Search  <i class="fas fa-search-plus"></i></a>
+        
+          </form>
+      </li>
+  
+    </ul>
+
+    <ul class="navbar-nav justify-content-center nav-fill w-100  px-3">
+      <li class="nav-item active">
+        <a class="nav-link " href="memberlogin" onclick="document.body.style.cursor='wait'; return true;">Home<span class="sr-only">(current)</span></a>
+      </li>
+     <li class="nav-item ">
+        <a class="nav-link" href="#" onclick="document.body.style.cursor='wait'; return true;">About</a>
+      </li>
+      
+         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               Profile
+                            </a>
+                            <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdownMenuLink">
+                
+                                <li class="dropdown-submenu" aria-labelledby="navbarDropdownMenuLink">                             
+        <a id="ep" class="test dropdown-item"  href="#">Edit Profile  <i id="caret" class="float-right fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu w-100">
+          <li><a class="dropdown-item w-100" data-target="#pwdreset" data-toggle="modal" 
+       href="#pwdreset"onclick="fresetpass()" >Reset Password <i class="float-right fas fa-edit"></i></a></li>
+        <li><a class="dropdown-item w-100" href="editprofile">Edit Information <i class="float-right fas fa-user-edit"></i></a></li>
+    
+        </ul>
+      </li>
+                                <a class="dropdown-item w-100" href="viewprofile">View Profile  <i class="float-right fas fa-users"></i></a>
+          <a class="dropdown-item w-100" href="/signout">Sign Out  <i class="float-right fas fa-sign-out-alt"></i></a>
+                                
+                                
+    
+                            </ul>
+                        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Orders</a>
+        <div class="dropdown-menu w-100 text-center text-md-left " aria-labelledby="navbarDropdownMenuLink">
+           <a class="dropdown-item w-100 pl-md-3 pl-lg-4 pr-lg-1 pr-md-0 " href="ordersummary" onclick="document.body.style.cursor='wait'; return true;">Checkout  <i class="ic fas fa-shopping-basket float-md-right mr-3"></i></a>
+            
+          <a class="dropdown-item w-100 pl-md-3 pl-lg-4 pr-lg-1 pr-md-0 " href="https://ibrazbib27.github.io/cs4050/orderhistory.html" onclick="document.body.style.cursor='wait'; return true;">Order History  <i class="ic fas fa-history float-md-right mr-3"></i></a>
+            
+          <a class="dropdown-item w-100 pl-md-3 pl-lg-4 pr-lg-1 pr-md-0 " href="viewcart" onclick="document.body.style.cursor='wait'; return true;">View Cart  <i class="ic fas fa-shopping-cart float-md-right mr-3"></i></a>
+        </div>
+      </li>
+        
+        
+
+    </ul>
+
+
+  </div>
+
+</nav>
+ <iframe style="display: none;" name="frame" id="frm"onload="frameLoad(this)" ></iframe>    
+ <iframe style="display: none;" name="frame1" id="frm1"onload="frameLoad1(this)" ></iframe>    
+  <div class="modal fade" id="cartError" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+             <h5 class='col-12 modal-title text-center' >
+            Book Already in Cart  <i class="far fa-times-circle text-danger"></i>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </h5>
+        </div>
+        <div class="modal-body">
+          The book you are trying to add to your cart is already there. Click the "View Cart" button below to view your cart.
+          <div class="modal-footer text-center row justify-content-md-between">
+           
+            <div class="col-12 col-md-4">
+          <a  role="button"   href="viewcart" class="btn btn-primary w-100 text-white" >View Cart</a>
+            </div>
+       
+           
+            
+            <div class="col-12 col-md-4">
+             <button type="button" class="btn  btn-danger w-100" data-dismiss="modal">Close</button>
+            </div>
+        
+      </div>
+      </div>
+      
+    </div>
+  </div>  
+    </div> 
+        <div class="modal fade" id="cartSuccess" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+             <h5 class='col-12 modal-title text-center' >
+           Cart Successfully Updated  <i class="far fa-check-square text-success"></i>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </h5>
+        </div>
+        <div class="modal-body">
+          The you you selected has successfully been added to your cart. Click the "View Cart" button below to view your cart.
+          <div  class="modal-footer text-center row justify-content-md-between">
+           
+            <div class="col-12 col-md-4">
+          <a  role="button"   href="viewcart" class="btn btn-primary w-100 text-white" >View Cart</a>
+            </div>
+       
+           
+            
+            <div class="col-12 col-md-4">
+             <button type="button" class="btn  btn-danger w-100" data-dismiss="modal">Close</button>
+            </div>
+        
+      </div>
+      </div>
+      
+    </div>
+  </div>  </div>
+         <div class="container-fluid h-100">
+         <div id="body" class="row">
+            <div class="overlay"></div> 
+             <div class="col-12 my-3 my-sm-4 my-md-5"></div>
+              <div class="col-12 my-md-5"></div>
+              <div class="col-12 my-md-5"></div>
+                        <div class="col-12 text-center justify-content-center mt-4">   
+       
+       
+             <div id="user"  class="card w-75 justify-content-center ml-auto mr-auto">
+     
+           <div id="cc" class="card-body ">
+          
+               
+                   
+                   <div class="row  w-100 mb-5">
+                     
+                        <div class="col-3 justify-content-start w-100 mx-0"> 
+                    
+                           
+                      
+                   </div>
+                   </div>
+                  <div id="info"  style="display: none;" th:text="${rez}"></div>
+         
+    
+			
+       
+
+
+          <script>
+          var json = document.getElementById("info").innerHTML;
+          var parse = true;
+      if(json == "[]")
+    	  parse = false;
+    	  
+         
+         if(parse == true){
+        	 var booksplit = json.split("],");
+        	 var count=0;
+          for (var i = 0; i < booksplit.length; i++) {
+        	  var bookdetails = booksplit[i].split(",");
+        
+        	 var bookfinal = [];
+       
+        	 
+        	 for (var j = 1; j < bookdetails.length; j++) {
+        		 if(bookdetails[j].includes("=")){
+        		var answer = bookdetails[j].split("=");
+        	
+        		bookfinal[j-1] = answer[1];
+        		 }
+        		 else{
+        			 bookfinal[11] += ", "+ bookdetails[j];
+        		 }
+        		
+        	
+        	 }
+       
+     
+        	
+        
+              var bookrows ='<div  class="row  border-top border-bottom justify-content-start w-100 mx-0"><div class="col-2 order-1 py-4 "><img id="img" src="'+bookfinal[4]+'" class="img-thumbnail " alt="Book Image">	</div><div class="col-8 order-2 py-4 px-0 text-left w-100"><div class="row justify-content-start w-100"> <div class="col"><h2 id="t" class="w-100 ml-5 mb-0">'+bookfinal[0]+'</h2></div></div><div class="row justify-content-start w-100"> <div class="col font-weight-lighter"><span id="author" class="w-100 ml-5 small font-weight-light ">By '+bookfinal[1]+'</span>';
+              if((bookfinal[5]).trim() != "")
+            	  bookrows +=  '<span id="edition" class="small font-weight-light "> | '+bookfinal[5]+'</span>';
+              
+              if((bookfinal[6]).trim() != "")
+            	  bookrows += '<span id="pub" class="small font-weight-light "> | '+bookfinal[6]+'</span>';
+              
+              
+              if((bookfinal[8]).trim() != "")
+            	  bookrows +='<span id="year "class="small font-weight-light "> | '+bookfinal[8]+'</span>';
+              if((bookfinal[3]).trim() != "")
+            	  bookrows +='<span id="cat" class="small font-weight-light "> | '+bookfinal[3]+'</span>';
+              
+            	  bookrows +='</div></div>';
+            	
+            	  if (i == (booksplit.length-1))
+             bookfinal[11] = bookfinal[11].substring(0, bookfinal[11].length-1);
+            	  bookrows +='<div class="row justify-content-start w-100 mt-3"> <div class="col"><span id="format"class="w-100 ml-5 ">'+bookfinal[11]+'</span></div></div>';
+              if(parseInt((bookfinal[7]).trim()) > 0)
+            	  bookrows += '<div class="row justify-content-start w-100"> <div class="col"><span id="stock'+i+'"class="w-100 ml-5 text-success">In Stock</span></div></div>';
+             else
+           	  bookrows += '<div class="row justify-content-start w-100"> <div class="col"><span id="stock"class="w-100 ml-5 text-danger">Out of Stock</span></div></div>';
+
+            	  bookrows += '<div class="row justify-content-start w-100 "> <div class="col"><span class="w-100 ml-5 font-weight-bolder" id="price">'+bookfinal[10]+'</span></div></div></div><div class="col-2  py-4 px-0 text-center order-3 w-100"><div class="row h-100 w-100 mx-0"><div class="col-12 mt-2 w-100 px-0 align-self-start"><a href="http://localhost:8080/home/customerlogin/bookdetails?booknum='+bookfinal[2]+'" " role="button" class="btn btn-sm btn-default btn-primary w-100 p-1 text-white" id="viewDetails">View Details  <i class="fas fa-eye ml-2"></i></button> </div><div id="addbtn'+i+'"class="col-12 px-0 mb-2 w-100 align-self-end"><a href="http://localhost:8080/home/customerlogin/addtocart?booknum='+bookfinal[2]+'" target="frame1" role="button" class="btn btn-defaut btn-success btn-sm w-100 p-1 text-white" id="addCart">Add to Cart  <i class="fas fa-plus-circle ml-2"></i></a</div> </div></div>';
+            	  document.getElementById("cc").innerHTML  += bookrows;
+          }}
+
+       else{
+    	   document.getElementById("cc").innerHTML +='<div  class="row  justify-content-center w-100 mx-0"><span class="h4"><i class="fas fa-exclamation-circle mr-2"></i> No Books Found...</span></div>';
+         }
+        count++;
+          </script>
+           
+             <script>
+         
+              function frameLoad1(){
+            	  var vals = $('#frm1').contents().find('#refresh').text();
+         		  if (vals.includes('NoCart')){
+         			 $('#cartError').modal('show');
+         		  }
+         		 if (vals.includes('YesCart')){
+         			 $('#cartSuccess').modal('show');
+         		  }
+              }
+              </script>
+
+            
+  
+</div>
+       </div>
+             </div>
+ 
+               
+     <div class="col-12 py-md-5 py-3" ></div>
+
+        
+            
+<div id="footer" style="background-color: #f2f2f2; "class="col-12 align-self-end py-md-2 py-1">
+
+<div class="col-12 footeralign text-center">
+<i style="color:#3b5998; padding-right: 35px;"class="fab fa-facebook-square fa-2x"></i>
+<i style="color:#38A1F3; padding-right: 35px;"class="fab fa-twitter-square fa-2x"></i>
+<i style="color:#fb3958"class="fab fa-instagram-square fa-2x"></i>
+</div>
+
+<div id="bottom" class="col-12 footeralign text-center ">
+ © 2020 Copyright: BookIt.com
+</div>
+
+</div>
+         </div>  
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+          
+            <div class="modal fade"  id="filterSearch" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+             <h5 class='col-12 modal-title text-center'>
+              Advanced Search  <i class="fas fa-search-plus"></i>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </h5>
+        </div>
+        <div class="modal-body justify-content-center">
+             <div class="container-fluid">
+                 <form id="apply" onsubmit="document.body.style.cursor='wait'; return true;"  action="https://www.adweek.com/digital/news-sites-top-list-slowest-loading-web-pages-161619/">
+                     <div class="row py-5">
+                         <div  class='col-1'></div>
+                     <div  class='col-10'>
+                         
+                         <input class="form-control" type="text" placeholder="Keyword(s)">
+
+
+                     </div>
+                         <div  class='col-1'></div>
+                 </div>
+                     
+                     <div class="row py-1"></div> 
+                      <div class="row py-1"></div> 
+                     
+                           <div class="row py-5">
+                     <div  class='col-1'></div>
+                     <div  class='col-10'>
+                         <input class="form-control" type="text" placeholder="Author(s)" >
+                        
+                     </div>
+                        <div  class='col-1'></div>        
+                 </div>
+                     
+                   <div class="row py-1"></div> 
+                      <div class="row py-1"></div> 
+                     
+                     <div class="row py-5">
+                         <div  class='col-1'></div>
+                     <div  class='col-10'>
+                         <input class="form-control" type="text" placeholder="Title">
+                     </div>
+                        <div  class='col-1'></div>    
+                 </div>
+                     
+                     <div class="row py-1"></div> 
+                      <div class="row py-1"></div>
+                     
+                  <div class="row py-5">
+                  
+                        <div  class='col-1'></div>
+                     <div  class='col-10'>
+                         <input class="form-control" type="text" placeholder="ISBN(s)">
+                     </div>
+                        <div  class='col-1'></div>   
+                 </div>
+                     
+                    <div class="row py-1"></div> 
+                      <div class="row py-1"></div>
+                     
+                    <div class="row py-5">
+                     <div  class='col-1'></div>
+                     <div  class='col-10'>
+                         <input class="form-control" type="text" placeholder="Publisher(s)" >
+                     </div>
+                        <div  class='col-1'></div>   
+                 </div>
+                     
+                     <div class="row py-1"></div> 
+                      <div class="row py-1"></div>
+                     
+                      <div class="row py-5">
+                          <div  class='col-1'></div>
+                     <div  class='col-10'>
+                          <input class="form-control" type="number" placeholder="Publication Year" min="0" max="2020" >
+                     </div>
+                        <div  class='col-1'></div>   
+                    
+                 </div>
+                     
+                     <div class="row py-1"></div>
+                     
+                     
+                 <div class="row py-5">
+                     <div class='col-1'></div>
+                     <div class='col-10'>
+                         <div class="form-group">
+                         <select class="selectpicker form-control" multiple data-live-search="true" title="Platform(s)"  data-size="3">
+ <option value="">All Platforms</option>
+                              <option value="2656022011">Paperback</option>
+                              <option value="2656020011">Hardcover</option>
+                              <option value="618073011">Kindle Edition</option>
+			      <option value="1240885011">Audible Audio Edition</option>
+                              <option value="699209011">HTML</option>
+                              <option value="699208011">PDF</option>
+                              <option value="618075011">Audio CD</option>
+                              <option value="2656019011">Board Book</option>
+                              <option value="2682078011">Audio Cassette</option>
+                              <option value="618079011">Calendar</option>
+                              <option value="2656023011">School Binding</option>
+                              <option value="2682079011">MP3 CD</option>
+                              <option value="618075011">Audiobooks</option>
+                              <option value="618083011">Printed Books</option>
+</select>
+                         </div>
+                     </div>
+                     <div class='col-1'></div>
+                 </div>
+                          <div class="row py-5">
+                     <div class='col-1'></div>
+                     <div class='col-10'>
+                         <div class="form-group">
+                         <select class="selectpicker form-control"  multiple data-live-search="true" title="Subject(s)"  data-size="3">
+                                                 <option value="">All Subjects</option>
+
+                              <option value="1">Arts &amp; Photography</option>
+
+                              <option value="45">Bargain Books</option>
+
+                              <option value="2">Biographies &amp; Memoirs</option>
+
+                              <option value="3">Business &amp; Investing</option>
+
+                              <option value="4">Children's Books</option>
+
+                              <option value="12290">Christian Book &amp; Bibles</option>
+
+                              <option value="4366">Comics &amp; Graphic Novels</option>
+
+                              <option value="6">Cookbooks, Food &amp; Wine</option>
+
+                              <option value="48">Crafts, Hobbies &amp; Home</option>
+
+                              <option value="5">Computers &amp; Technology</option>
+
+                              <option value="21">Education &amp; Reference</option>
+
+                              <option value="301889">Gay &amp; Lesbian</option>
+
+                              <option value="10">Health, Fitness &amp; Dieting</option>
+
+                              <option value="9">History</option>
+
+                              <option value="86">Humor &amp; Entertainment</option>
+
+                              <option value="10777">Law</option>
+
+                              <option value="17">Literature &amp; Fiction</option>
+
+                              <option value="13996">Medicine</option>
+
+                              <option value="18">Mystery, Thriller &amp; Suspense</option>
+
+                              <option value="20">Parenting &amp; Relationships</option>
+
+                              <option value="3377866011">Politics &amp; Social Sciences</option>
+
+                              <option value="173507">Professional &amp; Technical Books</option>
+
+                              <option value="22">Religion &amp; Spirituality</option>
+
+                              <option value="23">Romance</option>
+
+                              <option value="75">Science &amp; Math</option>
+
+                              <option value="25">Science Fiction &amp; Fantasy</option>
+
+                              <option value="26">Sports &amp; Outdoors</option>
+
+                              <option value="28">Teens</option>
+
+                              <option value="27">Travel</option>
+</select>
+
+                         </div>   
+                     </div>
+                      <div class='col-1'></div>   
+                         
+                 </div>
+                     
+                     <div class="row py-5">
+                     <div class='col-1'></div>
+                     <div class='col-10'>
+                         <div class="form-group">
+                         <select class="selectpicker form-control" multiple data-live-search="true" title="Language(s)" data-size="3">
+                              <option value="">All Languages</option>
+                              <option value="Arabic">Arabic</option>
+                              <option value="English">English</option>
+                              <option value="French">French</option>
+                              <option value="German">German</option>
+                              <option value="Spanish">Spanish</option>
+</select>
+                         </div>
+                     </div>
+                         <div class='col-1'></div>
+                 </div> 
+                  <div class="row py-5">
+                      <div class='col-1'></div>
+                     <div class='col-10'>
+                         <div class="form-group">
+                         <select class="selectpicker form-control"   title="Condition(s)" multiple data-live-search="true" data-size="3">
+<option value="">All</option>
+  <option>New</option>
+  <option>Used</option>
+  <option>Like New</option>
+</select>
+                         </div>
+                     </div>
+                 </div>
+                 <div class='col-1'></div>
+                     <div class="row my-5"></div>  
+                 </form>
+                  
+                     </div>
+           
+        </div>
+       
+        <div class="modal-footer text-center row justify-content-md-between">
+           
+            <div class="col-12 col-md-4">
+          <button  type="submit" form="apply"  class="btn btn-success w-100" >Search</button>
+            </div>
+            
+           
+            
+            <div class="col-12 col-md-4">
+             <button type="button" class="btn  btn-danger w-100" data-dismiss="modal">Close</button>
+            </div>
+        
+      </div>
+      
+        </div></div>
+        
+        
+        
+        
+        
+        
+         <div class="modal fade" id="editProfile" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+             <h5 class='col-12 modal-title text-center' style="color: black;">
+             Edit Profile  <i class="fas fa-user-edit"></i>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </h5>
+        </div>
+        <div class="modal-body">
+         
+        </div>
+        <div class="modal-footer" style="text-align:center;" >
+          <button id="editProfileBtn"  type="button"  style="margin:auto;display:block; background-color: red; color: white;"  data-dismiss="modal" class="btn btn-default" >Login</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>    
+        </div> 
+          <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+   
+        <!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+        
+   
+    <script type="text/javascript">
+$('#filterSearch').on('shown.bs.modal', function () {
+  $(this).find('input:first').trigger('focus')
+})
+
+    </script>
+             <script>
+            var editprofile = 0;
+     $("#ep").click(function(){
+        editprofile++;
+         if(editprofile%2 == 1){
+         document.getElementById('caret').classList.remove("fa-caret-down");
+         document.getElementById('caret').classList.add("fa-caret-right");
+         }
+         else{
+             document.getElementById('caret').classList.remove("fa-caret-right");
+             document.getElementById('caret').classList.add("fa-caret-down");
+         }
+     });
+                 
+                 $(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+    </script>
+        </div>
+        
+</body></html>
